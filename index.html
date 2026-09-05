@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free SSC CGL, CHSL, Railway NTPC Typing Test Simulator with real exam interface. Practice typing speed (WPM), accuracy, and KDPH. Hindi & English supported.">
+  <meta name="keywords" content="SSC typing test, SSC CGL DEST, SSC CHSL typing, Railway NTPC typing test, typing speed test online free, typing practice, government exam typing test, Hindi typing test">
+  <meta name="author" content="SSC Typing Simulator">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SSC Typing Simulator — Free Online Typing Test">
+  <meta property="og:description" content="Practice SSC CGL, CHSL & Railway typing tests with real exam interface. Track WPM, accuracy & weak keys.">
+  <meta property="og:type" content="website">
+
+  <title>SSC Typing Simulator — Free Online Typing Test | CGL, CHSL, Railway NTPC</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌨️</text></svg>">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- ═══════ NAVBAR ═══════ -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="logo-icon">⌨️</div>
+      <div>
+        <h1>SSC Typing Simulator</h1>
+      </div>
+      <span class="badge">FREE</span>
+    </div>
+    <div class="navbar-stats">
+      <div class="stat-item">
+        📊 Total Tests: <span class="stat-value" id="total-tests">0</span>
+      </div>
+      <button id="sound-toggle" class="nav-icon-btn" title="Toggle Sound">🔊</button>
+      <button id="theme-toggle" class="nav-icon-btn" title="Toggle Theme">☀️</button>
+    </div>
+  </nav>
+
+  <!-- ═══════ HOME SCREEN ═══════ -->
+  <div id="home-screen" class="screen home-screen">
+
+    <!-- Hero -->
+    <section class="hero">
+      <h2>Practice Typing Like the <span class="highlight">Real Exam</span></h2>
+      <p>SSC CGL, CHSL और Railway NTPC के एकदम असली एग्जाम इंटरफ़ेस पर अपनी टाइपिंग स्पीड बढ़ाएं। 100% Free!</p>
+      <div class="hero-features">
+        <div class="feature-tag"><span class="dot"></span> Real Exam Interface</div>
+        <div class="feature-tag"><span class="dot"></span> Live WPM & Accuracy</div>
+        <div class="feature-tag"><span class="dot"></span> Weak Key Analysis</div>
+        <div class="feature-tag"><span class="dot"></span> Hindi + English</div>
+      </div>
+    </section>
+
+    <!-- Exam Selection -->
+    <h3 class="section-title">📋 Choose Your Exam</h3>
+    <div class="exam-grid">
+      <div class="exam-card" data-exam="SSC CGL" id="card-ssc-cgl">
+        <div class="card-icon">📋</div>
+        <div class="card-title">SSC CGL</div>
+        <div class="card-subtitle">Data Entry Speed Test (DEST)</div>
+        <div class="card-meta">
+          <span class="meta-tag">⏱ 15 min</span>
+          <span class="meta-tag">🎯 8000 KDPH</span>
+        </div>
+      </div>
+      <div class="exam-card" data-exam="SSC CHSL" id="card-ssc-chsl">
+        <div class="card-icon">📝</div>
+        <div class="card-title">SSC CHSL</div>
+        <div class="card-subtitle">Typing Skill Test</div>
+        <div class="card-meta">
+          <span class="meta-tag">⏱ 10 min</span>
+          <span class="meta-tag">🎯 35 WPM (En) / 30 WPM (Hi)</span>
+        </div>
+      </div>
+      <div class="exam-card" data-exam="Railway NTPC" id="card-railway-ntpc">
+        <div class="card-icon">🚂</div>
+        <div class="card-title">Railway NTPC</div>
+        <div class="card-subtitle">Typing Skill Test</div>
+        <div class="card-meta">
+          <span class="meta-tag">⏱ 10 min</span>
+          <span class="meta-tag">🎯 30 WPM (En) / 25 WPM (Hi)</span>
+        </div>
+      </div>
+      <div class="exam-card" data-exam="Custom" id="card-custom">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Custom Practice</div>
+        <div class="card-subtitle">Free Practice Mode</div>
+        <div class="card-meta">
+          <span class="meta-tag">⏱ 5 min</span>
+          <span class="meta-tag">🎯 No minimum</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="settings-panel">
+      <div class="settings-row">
+        <div class="setting-group">
+          <label for="language-select">🌐 Language</label>
+          <select id="language-select">
+            <option value="english">English</option>
+            <option value="hindi">हिंदी (Hindi)</option>
+          </select>
+        </div>
+        <div class="setting-group">
+          <label for="duration-select">⏱ Duration (Minutes)</label>
+          <select id="duration-select">
+            <option value="5">5 Minutes</option>
+            <option value="10" selected>10 Minutes</option>
+            <option value="15">15 Minutes</option>
+            <option value="20">20 Minutes</option>
+            <option value="30">30 Minutes</option>
+          </select>
+        </div>
+        <div class="start-btn-wrapper">
+          <button id="btn-start" class="btn-start" disabled>
+            🚀 START TEST
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Section -->
+    <div class="settings-panel" style="margin-bottom: 32px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 class="section-title" style="margin-bottom: 0;">📈 Your Progress & History</h3>
+        <button id="btn-clear-history" class="btn-secondary" style="padding: 6px 14px; font-size: 0.75rem;">🗑️ Clear</button>
+      </div>
+      <div id="history-section">
+        <div class="history-empty">
+          <p>📝 अभी कोई Test History नहीं है।</p>
+          <p style="color: var(--gray-500); font-size: 0.85rem;">पहला टेस्ट दें, फिर यहाँ आपकी Progress दिखेगी!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Made with ❤️ for SSC, CHSL & Railway Aspirants | 100% Free | No Registration Required</p>
+      <p style="margin-top: 8px;">© 2025 SSC Typing Simulator. Practice daily, crack the exam! 💪</p>
+    </footer>
+  </div>
+
+  <!-- ═══════ TEST SCREEN ═══════ -->
+  <div id="test-screen" class="screen test-screen hidden">
+
+    <!-- Test Header -->
+    <div class="test-header">
+      <div class="test-info">
+        <span class="exam-name" id="test-exam-name">SSC CGL</span>
+        <span class="exam-lang" id="test-exam-lang">English</span>
+      </div>
+      <div class="test-stats">
+        <div class="test-stat">
+          <div class="stat-label">Time Left</div>
+          <div class="stat-value timer" id="timer-value">10:00</div>
+        </div>
+        <div class="test-stat">
+          <div class="stat-label">WPM</div>
+          <div class="stat-value wpm" id="header-wpm">0</div>
+        </div>
+        <button class="btn-submit-test" onclick="submitTest()">
+          ⏹ Submit Test
+        </button>
+      </div>
+    </div>
+
+    <!-- Passage Area -->
+    <div class="passage-container">
+      <span class="passage-label">📖 Passage — Read & Type Below</span>
+      <div class="passage-text" id="passage-text">
+        <!-- Characters rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Typing Area -->
+    <div class="typing-container">
+      <span class="typing-label">⌨️ Type Here</span>
+      <textarea class="typing-area" id="typing-area" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="यहाँ टाइप करना शुरू करें... (Type here to begin)"></textarea>
+    </div>
+
+    <!-- Live Stats Bar -->
+    <div class="live-stats">
+      <div class="live-stat">
+        <span class="icon">⚡</span>
+        <span class="label">WPM:</span>
+        <span class="value good" id="live-wpm">0</span>
+      </div>
+      <div class="live-stat">
+        <span class="icon">🎯</span>
+        <span class="label">Accuracy:</span>
+        <span class="value good" id="live-accuracy">100%</span>
+      </div>
+      <div class="live-stat">
+        <span class="icon">✅</span>
+        <span class="label">Correct:</span>
+        <span class="value good" id="live-correct">0</span>
+      </div>
+      <div class="live-stat">
+        <span class="icon">❌</span>
+        <span class="label">Wrong:</span>
+        <span class="value bad" id="live-wrong">0</span>
+      </div>
+      <div class="live-stat">
+        <span class="icon">⌨️</span>
+        <span class="label">Keystrokes:</span>
+        <span class="value neutral" id="live-keystrokes">0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ RESULTS SCREEN ═══════ -->
+  <div id="results-screen" class="screen results-screen hidden">
+
+    <!-- Results Hero -->
+    <div class="results-hero">
+      <div id="result-status" class="result-status qualified">✅ QUALIFIED</div>
+      <h2>🎯 Test Complete!</h2>
+      <p>यहाँ आपकी पूरी Performance Report है:</p>
+    </div>
+
+    <!-- Score Cards -->
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-icon">⚡</div>
+        <div class="score-value speed" id="result-wpm">0</div>
+        <div class="score-label">Words Per Minute (WPM)</div>
+      </div>
+      <div class="score-card">
+        <div class="score-icon">🎯</div>
+        <div class="score-value accuracy" id="result-accuracy">0%</div>
+        <div class="score-label">Accuracy</div>
+      </div>
+      <div class="score-card">
+        <div class="score-icon">❌</div>
+        <div class="score-value errors" id="result-errors">0</div>
+        <div class="score-label">Errors</div>
+      </div>
+      <div class="score-card">
+        <div class="score-icon">⌨️</div>
+        <div class="score-value kdph" id="result-kdph">0</div>
+        <div class="score-label">KDPH</div>
+      </div>
+    </div>
+
+    <!-- Detailed Stats -->
+    <div class="analysis-section">
+      <h3>📊 Detailed Analysis</h3>
+      <div class="score-grid" style="margin-bottom: 0;">
+        <div class="score-card" style="padding: 16px;">
+          <div class="score-value" style="font-size: 1.5rem; color: var(--gray-200);" id="result-total-chars">0</div>
+          <div class="score-label">Total Characters</div>
+        </div>
+        <div class="score-card" style="padding: 16px;">
+          <div class="score-value" style="font-size: 1.5rem; color: var(--success-400);" id="result-correct-chars">0</div>
+          <div class="score-label">Correct Characters</div>
+        </div>
+        <div class="score-card" style="padding: 16px;">
+          <div class="score-value" style="font-size: 1.5rem; color: var(--accent-400);" id="result-time">0</div>
+          <div class="score-label">Time Taken</div>
+        </div>
+        <div class="score-card" style="padding: 16px;">
+          <div class="score-value" style="font-size: 1.5rem; color: var(--primary-300);" id="result-keystrokes">0</div>
+          <div class="score-label">Total Keystrokes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weak Keys -->
+    <div class="analysis-section">
+      <h3>⚠️ Weak Keys (सबसे ज़्यादा गलतियां)</h3>
+      <div class="weak-keys-grid" id="weak-keys-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Requirement Check -->
+    <div class="analysis-section">
+      <h3>📋 Exam Requirement Check</h3>
+      <div id="requirement-box" class="requirement-box pass">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="result-actions">
+      <button id="btn-share" class="btn btn-whatsapp">
+        📱 Share on WhatsApp
+      </button>
+      <button id="btn-retake" class="btn btn-primary">
+        🔄 Retake Test
+      </button>
+      <button id="btn-home" class="btn btn-secondary">
+        🏠 Go Home
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Made with ❤️ for SSC, CHSL & Railway Aspirants | 100% Free</p>
+      <p style="margin-top: 8px;">रोज़ प्रैक्टिस करें, एग्जाम ज़रूर क्रैक होगा! 💪</p>
+    </footer>
+  </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="passages.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
