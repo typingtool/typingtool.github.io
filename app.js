@@ -471,12 +471,15 @@ class TypingSimulator {
     let correct = 0;
     let incorrect = 0;
 
-    // Play sound for the latest character typed
+    // Play sound and track weak keys for the latest character typed
     const newLen = typedText.length;
     if (newLen > this.lastTypedLength && newLen <= passageText.length) {
       const lastIdx = newLen - 1;
       if (typedText[lastIdx] !== passageText[lastIdx]) {
         this.sound.playError();
+        // Track the error exactly once when it happens
+        const expectedKey = passageText[lastIdx];
+        this.keyErrors[expectedKey] = (this.keyErrors[expectedKey] || 0) + 1;
       }
     }
     this.lastTypedLength = newLen;
@@ -494,8 +497,6 @@ class TypingSimulator {
         } else {
           span.classList.add('incorrect');
           incorrect++;
-          const expectedKey = passageText[i];
-          this.keyErrors[expectedKey] = (this.keyErrors[expectedKey] || 0) + 1;
         }
       } else if (i === typedText.length) {
         span.classList.add('current');
